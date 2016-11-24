@@ -19,7 +19,16 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.inner{
+  margin-left: 30px;
+}
+.header{
+  position: absolute;
+  text-align: left;
+  z-index: 5;
+  background:linear-gradient(to bottom, rgba(77, 80, 97,1) 10%,rgba(77, 80, 97,0) );
+  width:72vw;
+  color: #70ef94;
+  right:28vw;
+  font-family:'Oregano', cursive;
 }

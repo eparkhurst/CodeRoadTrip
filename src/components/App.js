@@ -15,8 +15,22 @@ class App extends Component {
       return response.json()
     })
     .then((response)=>{
-      this.setState({locationArray:response,response:true})
+      const locationArray = response.map((e)=>{
+        return e.location
+      })
+      const blogArray = response.map((e)=>{
+        return{title:e.title,text:e.text}
+      })
+      console.log('in App',blogArray);
+      this.setState({
+        locationArray:locationArray,
+        blogArray:blogArray,
+        response:true
+      })
     })
+  }
+  openModal(index){
+    
   }
   render() {
     if(!this.state.response){
@@ -25,8 +39,13 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <div className="header">
+          <div className="inner">
+            <h3>Code Road Trip</h3>
+          </div>
+        </div>
         <Map locations={this.state.locationArray}/>
-        <Blog />
+        <Blog blogs={this.state.blogArray}/>
       </div>
     );
   }

@@ -14,7 +14,6 @@ class Map extends Component{
     }
 
     const locationsArray = this.props.locations
-    console.log(locationsArray);
     GoogleMapsLoader.KEY = 'AIzaSyDiwAmvLRL_fSRPtIMIQ2OdX13wHNDTBFI'
     GoogleMapsLoader.load(function(google) {
 
@@ -46,7 +45,6 @@ class Map extends Component{
     });
   }
   render(){
-    console.log(this.props);
     return <div id="map">
       <h1>Map Section</h1>
     </div>
