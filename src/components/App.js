@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import 'whatwg-fetch'
 import Map from './Map.js'
 import Blog from './Blog.js'
+import Modal from './Modal.js'
 import './App.css'
 
 class App extends Component {
   constructor(){
     super()
-    this.state={locationArray:[],response:false}
+    this.state={locationArray:[],response:false, class:'hidden'}
+    this.openModal = this.openModal.bind(this)
   }
   componentDidMount() {
     fetch('http://localhost:3000/')
@@ -25,18 +27,29 @@ class App extends Component {
       this.setState({
         locationArray:locationArray,
         blogArray:blogArray,
-        response:true
+        response:true,
+        class:"hidden",
+        current:"N/A"
       })
     })
   }
   openModal(index){
-    
+    const oldState = this.state
+    let newState
+    if(oldState.class === 'hidden'){
+      newState = Object.assign({},oldState,{class:"show",current:oldState.blogArray[index]})
+    }else{
+      newState = Object.assign({},oldState,{class:"hidden"})
+    }
+    this.setState(newState)
+    console.log('hit');
   }
   render() {
     if(!this.state.response){
-      console.log("hit");
       return <div>Not Mounted</div>
     }
+    let coverClass = "cover "+this.state.class
+    let modalClass = "modal "+this.state.class
     return (
       <div className="App">
         <div className="header">
@@ -44,8 +57,10 @@ class App extends Component {
             <h3>Code Road Trip</h3>
           </div>
         </div>
+        <div className={coverClass} onClick={this.openModal}></div>
+        <Modal className={modalClass} current={this.state.current}/>
         <Map locations={this.state.locationArray}/>
-        <Blog blogs={this.state.blogArray}/>
+        <Blog toggleModal={this.openModal} blogs={this.state.blogArray}/>
       </div>
     );
   }

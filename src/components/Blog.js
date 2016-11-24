@@ -8,7 +8,7 @@ class Blog extends Component{
     return <div className="blog">
       <h1 className="blogTitle">Travel Blog</h1>
       {blogs.map((e,i)=>{
-        return <Entry key={i} title={e.title} text={e.text}/>
+        return <Entry toggleModal={this.props.toggleModal} index={i} key={i} title={e.title} text={e.text}/>
       })}
     </div>
   }

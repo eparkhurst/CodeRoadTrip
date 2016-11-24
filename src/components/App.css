@@ -28,7 +28,38 @@
   z-index: 5;
   background:linear-gradient(to bottom, rgba(77, 80, 97,1) 10%,rgba(77, 80, 97,0) );
   width:72vw;
-  color: #70ef94;
   right:28vw;
+  color: #70ef94;
   font-family:'Oregano', cursive;
+}
+.hidden{
+  display: none;
+}
+.show{
+  display: block;
+}
+.modal{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 9;
+  color: white;
+  background-color: #4D5061;
+  width: 50vw;
+  padding: 8px;
+}
+.modal h1{
+  color: #70ef94;
+  font-family:'Oregano', cursive;
+}
+.cover{
+  position: absolute;
+  z-index: 8;
+  background-color: black;
+  opacity: 0.5;
+  width: 100vw;
+  height: 100vh;
 }
