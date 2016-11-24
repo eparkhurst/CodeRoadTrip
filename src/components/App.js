@@ -1,15 +1,26 @@
-import React, { Component } from 'react';
-import logo from '../logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import 'whatwg-fetch'
+import Map from './Map.js'
+import Blog from './Blog.js'
+import './App.css'
 
 class App extends Component {
+  componentDidMount() {
+    fetch('http://localhost:3000/')
+    .then((response)=>{
+      return response.json()
+    })
+    .then((response)=>{
+      console.log(response)
+    })
+
+
+  }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
+        <Map />
+        <Blog />
       </div>
     );
   }
