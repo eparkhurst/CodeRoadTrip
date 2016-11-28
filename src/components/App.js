@@ -12,7 +12,7 @@ class App extends Component {
     this.openModal = this.openModal.bind(this)
   }
   componentDidMount() {
-    fetch('http://localhost:3000/')
+    fetch('https://serene-brook-99802.herokuapp.com/')
     .then((response)=>{
       return response.json()
     })
@@ -23,7 +23,6 @@ class App extends Component {
       const blogArray = response.map((e)=>{
         return{title:e.title,text:e.text}
       })
-      console.log('in App',blogArray);
       this.setState({
         locationArray:locationArray,
         blogArray:blogArray,
@@ -42,7 +41,6 @@ class App extends Component {
       newState = Object.assign({},oldState,{class:"hidden"})
     }
     this.setState(newState)
-    console.log('hit');
   }
   render() {
     if(!this.state.response){
