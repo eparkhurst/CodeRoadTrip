@@ -48,12 +48,16 @@
   z-index: 9;
   color: white;
   background-color: #4D5061;
-  width: 50vw;
-  padding: 8px;
+  width: 60vw;
+  padding: 25px;
 }
 .modal h1{
   color: #70ef94;
   font-family:'Oregano', cursive;
+}
+.modal p{
+  text-align: left;
+  line-height: 1.5;
 }
 .cover{
   position: absolute;

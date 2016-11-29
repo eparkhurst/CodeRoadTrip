@@ -13,16 +13,20 @@ class App extends Component {
   }
   componentDidMount() {
     fetch('https://serene-brook-99802.herokuapp.com/')
+    //fetch('http://localhost:3000')
     .then((response)=>{
       return response.json()
     })
     .then((response)=>{
-      const locationArray = response.map((e)=>{
+      const locationArray = response.filter((e)=>{
+        return e.location
+      }).map((e)=>{
         return e.location
       })
+      console.log(locationArray);
       const blogArray = response.map((e)=>{
         return{title:e.title,text:e.text}
-      })
+      }).reverse()
       this.setState({
         locationArray:locationArray,
         blogArray:blogArray,
@@ -31,6 +35,7 @@ class App extends Component {
         current:"N/A"
       })
     })
+
   }
   openModal(index){
     const oldState = this.state
