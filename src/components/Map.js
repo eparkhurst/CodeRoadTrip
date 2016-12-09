@@ -12,8 +12,21 @@ class Map extends Component{
         return {location:e,stopover:true}
       })
     }
+    const keys = Object.keys(this.props.giantObj)
+    const locationsArray = keys.reduce((p,c)=>{
+      p.push(this.props.giantObj[c])
+      return p
+    },[]).filter((e)=>{
+      return e.location
+    }).map((e)=>{
+      return e.location
+    })
+    const blogs  = keys.reduce((p,c)=>{
+      p.push(this.props.giantObj[c])
+      return p
+    },[])
+    const toggleModal = this.props.toggleModal
 
-    const locationsArray = this.props.locations
     GoogleMapsLoader.KEY = 'AIzaSyDiwAmvLRL_fSRPtIMIQ2OdX13wHNDTBFI'
     GoogleMapsLoader.load(function(google) {
 
@@ -27,7 +40,14 @@ class Map extends Component{
         mapTypeId: 'hybrid',
         mapTypeControl: false,
       });
-
+      var markers = blogs.map(function(blog, i) {
+        return new google.maps.Marker({
+          position: blog.location,
+          map:map
+        }).addListener('click', function(){
+          toggleModal(blog.id)
+        })
+      });
       directionsDisplay.setMap(map);
 
       var request = {

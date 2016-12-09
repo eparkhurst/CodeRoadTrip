@@ -4,6 +4,7 @@ import Map from './Map.js'
 import Blog from './Blog.js'
 import Modal from './Modal.js'
 import './App.css'
+import * as helperObj from '../lib/helpers.js'
 
 class App extends Component {
   constructor(){
@@ -12,23 +13,32 @@ class App extends Component {
     this.openModal = this.openModal.bind(this)
   }
   componentDidMount() {
-    fetch('https://serene-brook-99802.herokuapp.com/')
-    //fetch('http://localhost:3000')
+    fetch('https://serene-brook-99802.herokuapp.com/blogs')
+    //fetch('http://localhost:3000/blogs')
     .then((response)=>{
       return response.json()
     })
     .then((response)=>{
+      return response.sort((a,b)=>{
+        if(a.id == null) a.id = 0
+        return ((a.id < b.id) ? -1 : ((a.id > b.id) ? 1 : 0));
+      })
+    })
+    .then((response)=>{
+      const giantObj = helperObj.default.createObjById(response)
+      console.log(giantObj);
+      console.log(response);
       const locationArray = response.filter((e)=>{
         return e.location
       }).map((e)=>{
         return e.location
       })
-      console.log(locationArray);
       const blogArray = response.map((e)=>{
         return{title:e.title,text:e.text}
       }).reverse()
       this.setState({
         locationArray:locationArray,
+        giantObj:giantObj,
         blogArray:blogArray,
         response:true,
         class:"hidden",
@@ -41,7 +51,7 @@ class App extends Component {
     const oldState = this.state
     let newState
     if(oldState.class === 'hidden'){
-      newState = Object.assign({},oldState,{class:"show",current:oldState.blogArray[index]})
+      newState = Object.assign({},oldState,{class:"show",current:oldState.giantObj[index]})
     }else{
       newState = Object.assign({},oldState,{class:"hidden"})
     }
@@ -62,8 +72,8 @@ class App extends Component {
         </div>
         <div className={coverClass} onClick={this.openModal}></div>
         <Modal className={modalClass} current={this.state.current}/>
-        <Map locations={this.state.locationArray}/>
-        <Blog toggleModal={this.openModal} blogs={this.state.blogArray}/>
+        <Map toggleModal={this.openModal} giantObj={this.state.giantObj}/>
+        <Blog toggleModal={this.openModal} giantObj={this.state.giantObj}/>
       </div>
     );
   }
