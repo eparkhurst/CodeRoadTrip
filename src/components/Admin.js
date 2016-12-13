@@ -1,5 +1,7 @@
 import React , {Component} from 'react'
 import 'whatwg-fetch'
+import { browserHistory,Link } from 'react-router';
+import './Admin.css'
 
 class Admin extends Component{
   constructor(){
@@ -9,7 +11,6 @@ class Admin extends Component{
     this.showPosition = this.showPosition.bind(this)
   }
   sendData(loc){
-    console.log(loc);
     fetch('http://localhost:3000/locations', {
       method: 'POST',
       headers: {
@@ -20,6 +21,8 @@ class Admin extends Component{
         text: this.refs.text.value,
         location:loc
       })
+    }).then(()=>{
+      browserHistory.push('/');
     })
   }
   getLocation(event) {
@@ -32,7 +35,7 @@ class Admin extends Component{
   }
 
   showPosition(position) {
-    var loc = {lat:position.coords.latitude, lng:position.coords.longitude}
+    const loc = {lat:position.coords.latitude, lng:position.coords.longitude}
     this.sendData(loc)
   }
 
@@ -40,11 +43,16 @@ class Admin extends Component{
     return <div>
       <form onSubmit={this.getLocation}>
         <label>Title</label>
-        <input type="text" ref="title"/>
-        <label>text</label>
+        <input className="title" type="text" ref="title"/>
+        <label>Text</label>
         <textarea ref="text"/>
         <button type="submit">Add Blog</button>
+        <label>
+          Add Location
+          <input type="checkbox" name="locationType"/>
+        </label>
       </form>
+      <Link to="/">Back to Map</Link>
     </div>
   }
 }

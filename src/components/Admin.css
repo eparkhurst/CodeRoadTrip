@@ -1,0 +1,19 @@
+form > *{
+  display: block;
+  margin: auto;
+}
+form{
+  text-align: center;
+}
+form label{
+  font-size: 32px;
+}
+.title{
+  font-size: 24px;
+  text-align: center;
+}
+textarea{
+  height: 400px;
+  width:400px;
+  font-size: 14px;
+}

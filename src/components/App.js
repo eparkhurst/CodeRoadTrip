@@ -6,6 +6,7 @@ import Modal from './Modal.js'
 import './App.css'
 import * as helperObj from '../lib/helpers.js'
 
+
 class App extends Component {
   constructor(){
     super()
@@ -19,34 +20,22 @@ class App extends Component {
       return response.json()
     })
     .then((response)=>{
-      return response.sort((a,b)=>{
-        if(a.id == null) a.id = 0
-        return ((a.id < b.id) ? -1 : ((a.id > b.id) ? 1 : 0));
-      })
+      return helperObj.default.orderObject(response)
     })
     .then((response)=>{
       const giantObj = helperObj.default.createObjById(response)
-      console.log(giantObj);
-      console.log(response);
-      const locationArray = response.filter((e)=>{
-        return e.location
-      }).map((e)=>{
-        return e.location
-      })
-      const blogArray = response.map((e)=>{
-        return{title:e.title,text:e.text}
-      }).reverse()
+      const locationArray = helperObj.default.createLocationArray(response)
+
       this.setState({
         locationArray:locationArray,
         giantObj:giantObj,
-        blogArray:blogArray,
         response:true,
         class:"hidden",
         current:"N/A"
       })
     })
-
   }
+
   openModal(index){
     const oldState = this.state
     let newState

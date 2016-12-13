@@ -5,7 +5,7 @@ import './Map.css'
 class Map extends Component{
   componentDidMount(){
     function createWaypoints(array){
-      var newArray = array.concat([])
+      const newArray = array.concat([])
       newArray.shift()
       newArray.pop()
       return newArray.map((e)=>{
@@ -30,8 +30,8 @@ class Map extends Component{
     GoogleMapsLoader.KEY = 'AIzaSyDiwAmvLRL_fSRPtIMIQ2OdX13wHNDTBFI'
     GoogleMapsLoader.load(function(google) {
 
-      var directionsDisplay;
-      var directionsService = new google.maps.DirectionsService();
+      let directionsDisplay;
+      const directionsService = new google.maps.DirectionsService();
       directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true});
       const dessert = {lat:33.4484,lng: -112.0740};
       const map = new google.maps.Map(document.getElementById('map'),{
@@ -40,7 +40,7 @@ class Map extends Component{
         mapTypeId: 'hybrid',
         mapTypeControl: false,
       });
-      var markers = blogs.map(function(blog, i) {
+      const markers = blogs.map(function(blog, i) {
         return new google.maps.Marker({
           position: blog.location,
           map:map
@@ -50,7 +50,7 @@ class Map extends Component{
       });
       directionsDisplay.setMap(map);
 
-      var request = {
+      const request = {
         origin: locationsArray[0],
         destination:  locationsArray[locationsArray.length -1] ,
         waypoints:createWaypoints(locationsArray),
