@@ -5,7 +5,7 @@ form > *{
 form{
   text-align: center;
 }
-form label{
+.textLabel, .titleLabel{
   font-size: 32px;
 }
 .title{
