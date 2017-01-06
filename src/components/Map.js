@@ -40,9 +40,17 @@ class Map extends Component{
         mapTypeId: 'hybrid',
         mapTypeControl: false,
       });
-      const markers = blogs.map(function(blog, i) {
+      const image = new google.maps.MarkerImage(
+        './speechBubble.png',
+        null,
+        null,
+        new google.maps.Point(0, 25),
+        new google.maps.Size(30, 30)
+      )
+      blogs.map(function(blog, i) {
         return new google.maps.Marker({
           position: blog.location,
+          icon:image,
           map:map
         }).addListener('click', function(){
           toggleModal(blog.id)
