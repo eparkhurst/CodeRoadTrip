@@ -4,6 +4,7 @@ import './Map.css'
 
 class Map extends Component{
   componentDidMount(){
+
     function createWaypoints(array){
       const newArray = array.concat([])
       newArray.shift()
@@ -12,6 +13,7 @@ class Map extends Component{
         return {location:e,stopover:true}
       })
     }
+
     const keys = Object.keys(this.props.giantObj)
     const locationsArray = keys.reduce((p,c)=>{
       p.push(this.props.giantObj[c])
@@ -21,15 +23,16 @@ class Map extends Component{
     }).map((e)=>{
       return e.location
     })
+
     const blogs  = keys.reduce((p,c)=>{
       p.push(this.props.giantObj[c])
       return p
     },[])
+
     const toggleModal = this.props.toggleModal
 
     GoogleMapsLoader.KEY = 'AIzaSyDiwAmvLRL_fSRPtIMIQ2OdX13wHNDTBFI'
     GoogleMapsLoader.load(function(google) {
-
       let directionsDisplay;
       const directionsService = new google.maps.DirectionsService();
       directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true});
@@ -47,17 +50,19 @@ class Map extends Component{
         new google.maps.Point(0, 25),
         new google.maps.Size(30, 30)
       )
-      blogs.map(function(blog, i) {
-        return new google.maps.Marker({
-          position: blog.location,
-          icon:image,
-          map:map
-        }).addListener('click', function(){
-          toggleModal(blog.id)
-        })
+
+      blogs.map(function(blog, i){
+        if (blog.text) {
+          return new google.maps.Marker({
+            position: blog.location,
+            icon:image,
+            map:map
+          }).addListener('click', function(){
+            toggleModal(blog.id)
+          })
+        }
       });
       directionsDisplay.setMap(map);
-
       const request = {
         origin: locationsArray[0],
         destination:  locationsArray[locationsArray.length -1] ,

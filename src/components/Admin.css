@@ -5,15 +5,33 @@ form > *{
 form{
   text-align: center;
 }
+label{
+  color: white;
+}
+.admin{
+  background-color: #4D5061;
+  height: 100vh;
+  text-align: center;
+}
+
 .textLabel, .titleLabel{
   font-size: 32px;
 }
 .title{
   font-size: 24px;
   text-align: center;
+  background-color: lightgrey;
 }
 textarea{
   height: 400px;
   width:400px;
   font-size: 14px;
+  background-color: lightgrey;
+}
+.submitButton{
+  font-size: 24px;
+  margin:50px auto;
+}
+.backButton{
+  margin-top:150px;
 }

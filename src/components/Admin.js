@@ -58,7 +58,7 @@ class Admin extends Component{
 
   render(){
     let locationChecked =  this.state.locationChecked
-    return <div>
+    return <div className="admin">
       <form onSubmit={this.getLocation}>
         <label className="titleLabel">Title</label>
         <input className="title" type="text" ref="title"/>
@@ -74,9 +74,9 @@ class Admin extends Component{
           <label>Longitude</label>
           <input type="text" ref="lng"/>
         </div>
-        <button type="submit">Add Blog</button>
+        <button className="submitButton" type="submit">Add Blog</button>
       </form>
-      <Link to="/">Back to Map</Link>
+      <Link className="backButton" to="/">Back to Map</Link>
     </div>
   }
 }
