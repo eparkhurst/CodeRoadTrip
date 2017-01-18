@@ -4,6 +4,7 @@ import Map from './Map.js'
 import Blog from './Blog.js'
 import Modal from './Modal.js'
 import './App.css'
+import loading from '../gears.svg'
 import * as helperObj from '../lib/helpers.js'
 
 
@@ -46,10 +47,13 @@ class App extends Component {
     }
     this.setState(newState)
   }
-  
+
   render() {
     if(!this.state.response){
-      return <div>Not Mounted</div>
+      return <div className="loadingGears">
+        <img src={loading} alt="Loading Gears"/>
+        <h2>Waiting for Heroku to wake up</h2>
+      </div>
     }
     let coverClass = "cover "+this.state.class
     let modalClass = "modal "+this.state.class

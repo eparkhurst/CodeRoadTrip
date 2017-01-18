@@ -61,6 +61,9 @@ class Map extends Component{
             toggleModal(blog.id)
           })
         }
+        else{
+          return null
+        }
       });
       directionsDisplay.setMap(map);
       const request = {
