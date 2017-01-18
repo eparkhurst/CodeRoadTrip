@@ -13,6 +13,7 @@ class Admin extends Component{
     this.changeLocationEntryType = this.changeLocationEntryType.bind(this)
   }
   sendData(loc){
+    //fetch('https://serene-brook-99802.herokuapp.com/locations', {
     fetch('http://localhost:3000/locations', {
       method: 'POST',
       headers: {

@@ -14,8 +14,8 @@ class App extends Component {
     this.openModal = this.openModal.bind(this)
   }
   componentDidMount() {
-    //fetch('https://serene-brook-99802.herokuapp.com/blogs')
-    fetch('http://localhost:3000/blogs')
+    fetch('https://serene-brook-99802.herokuapp.com/blogs')
+    //fetch('http://localhost:3000/blogs')
     .then((response)=>{
       return response.json()
     })
@@ -46,6 +46,7 @@ class App extends Component {
     }
     this.setState(newState)
   }
+  
   render() {
     if(!this.state.response){
       return <div>Not Mounted</div>
